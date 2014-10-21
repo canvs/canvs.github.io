@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <include file="Public/Wap/Public/head.html"/>
+</head>
+  <block name="title">{$data.title}</block>
+  <block name="style">
+    <style>
+body{
+  background-color: #eeeeee;
+  -webkit-appearance: none;
+}
+.top-bar{
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  background-color: white;
+  line-height: 40px;
+}
+#editsave{
+  float: right;
+  margin:0px 10px 0px 0px ;
+  color:#007aff;
+  font-size: 14px;
+  cursor: pointer;
+}
+#cancel{
+  float: left;
+  margin:0px 0px 0px 20px ;
+  color:#007aff;
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+}
+.head-photo{
+  margin: 30px auto;
+  width: 85px;
+  height: 85px;
+  border-radius: 42.5px;
+  border: 2px solid #88befa;
+  line-height: 85px;
+  overflow: hidden;
+}
+.head-photo img{
+    width: 80px;
+  height: 80px;
+
+}
+table{
+  border: 1px solid #ddd;
+  border-left:none;
+  border-right:none;
+  background-color: white;
+  width: 100%;
+}
+table tr>td:nth-child(odd){
+  margin-left: 10px;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing:5px;
+  padding-left: 10px;
+}
+table tr>td:nth-child(even){
+  font-size: 14px;
+  color: #999999;
+  text-align: left;
+}
+table tr{border-bottom: 1px solid #ddd;
+height: 40px;line-height: 40px;
+}
+input[type=text],select{
+  border: none;
+  margin-left: 30px;
+  height: 30px;
+  padding-left: 5px;
+}
+input:disabled{
+background-color: white;
+}
+select:focus{
+  border: none;
+  outline:none;
+}
+
+</style>
+  </block>
+
+<body>
+  <div class="top-bar">
+    <p id="cancel">取消</p>
+    <span>个人信息</span>
+    <p onclick="edit()"id="editsave">编辑</p>
+  </div>
+  <div class="head-photo">
+    <img src="{:ADDON_PUBLIC_PATH}/head-photo.png" alt=""></div>
+  <table>
+    <tbody>
+      <tr>
+        <td>名 字</td>
+        <td>
+          <input type="text"value="吴园江" id="ad_name"disabled="disabled"autofocus="autofocus"></td>
+      </tr>
+      <tr>
+        <td style="letter-spacing:normal">个性签名</td>
+        <td>
+          <input type="text"id="ad_autograph"value="why are you so diao"disabled="disabled"></td>
+      </tr>
+      <tr>
+        <td>生 日</td>
+        <td>
+          <input type="text"value="1990/01/02"id="ad_birth"disabled="disabled"></td>
+      </tr>
+      <tr>
+        <td>省 份</td>
+        <td>
+          <select name="" id="ad_province"disabled="disabled">
+            <option value="1">浙江省</option>
+            <option value="2">非洲</option>
+            <option value="3">刚果共和国</option>
+          </select>
+        </td>
+      </tr>
+      <tr><td>城 市</td>
+      <td>
+        <select name="" id="ad_city"disabled="disabled">
+            <option value="1">衢州</option>
+            <option value="2">杭州</option>
+            <option value="3">华盛达</option>
+          </select>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
+<block name="script">
+  <script>
+  function edit(){
+    var city= document.getElementById('ad_city');
+    var province= document.getElementById('ad_province');
+    var birth= document.getElementById('ad_birth');
+    var autograph= document.getElementById('ad_autograph');
+    var name= document.getElementById('ad_name');
+    var editsave= document.getElementById('editsave'); 
+    var cancel= document.getElementById('cancel'); 
+    
+    city.disabled=false;
+    province.disabled=false;
+    birth.disabled=false;
+    autograph.disabled=false;
+    name.disabled=false;
+    cancel.style.display="block";  
+    name.focus();
+    editsave.innerHTML="保存";
+  }
+  </script>
+</block>
