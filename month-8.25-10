@@ -1,0 +1,366 @@
+<extend name="Base/common" />
+<block name="body">
+  <style>
+  .row-selected{
+    text-align: center;
+  }
+  .regular-checkbox + label{
+    margin: 0px;
+  }
+ .tab-nav a:after{
+    position: absolute;
+    width: 10px;
+    height: 10px; 
+    content: ' ';
+    background-color: red;
+    border-radius: 5px;
+    z-index: 100;
+    top:7px;
+    right: 15px;
+  }
+  .nopadd{
+    padding: 0px 10%;
+    border-bottom: 1px solid #ddd;
+  }
+.on-off{
+}
+.enable-reply{
+  text-align: center;
+  padding: 40px 10%;
+  line-height: 68px;
+}
+.hedtite{
+  padding-top: 10px;
+}
+.hdtitema{
+  padding-right:10px;
+}
+.hdjj{
+  padding:0px 15px;
+  display: inline-block
+}
+.ffamily{
+  padding: 10px 10px;
+}
+#alertedit{
+  display: none;
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.7);
+  z-index: 50000;
+  box-shadow: 0px 0px 10px black;
+  text-align: center;
+}
+#editarea{
+  border-radius: 3px;
+  position: fixed;
+  background-color: white;
+  top: 30%;
+  left: 35%;
+  width: 500px;
+  min-height:100px;
+  z-index:50001;
+  box-shadow: 0px 0px 10px black;
+}
+.tipshow{ 
+  color:red;
+  display:none;
+}
+#editarea p{
+  text-align: left;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #ddd;
+  border-radius:3px;
+  margin-bottom: 10px;
+}
+#editarea input{
+  border-radius: 3px;
+}
+
+
+</style>
+  <div class="span9 page_message">
+    <section id="contents">
+      <ul class="tab-nav nav">
+        <li class="">
+          <a href="{:U('lists')}">
+            <span class="fa fa-th-large" style="margin-right: 10px;"></span>
+            兼职管理
+            <span class="arrow fa fa-sort-up"></span>
+          </a>
+        </li>
+        <li class="">
+          <a href="{:U('publist')}">
+            <span class="fa fa-th-large" style="margin-right: 10px;"></span>
+            发布者管理
+            <span class="arrow fa fa-sort-up"></span>
+          </a>
+        </li>
+        <li class="current">
+          <a href="{:U('basecofig')}">
+            <span class="fa fa-th-large" style="margin-right: 10px;"></span>
+            设置
+            <span class="arrow fa fa-sort-up"></span>
+          </a>
+        </li>
+      </ul>
+
+      <include file="Addons/_nav" />
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 nopadd">
+            <div class="on-off col-lg-6 hedtite">
+              <label class="hdtitema" >外部发布者发布</label>
+              <input type="checkbox" name="" checked />
+              <span class="hdjj">外部发布者需要通过管理员审核才能发布</span>
+            </div>
+
+            <!--div class="on-off col-lg-6">
+            <label class="hdtitema">联盟共享</label>
+            <input type="checkbox" name="" checked/>
+            <span class="hdjj">联盟选择</span>
+            <select name="" id=""class="conner">
+              <option value="1">天天赚兼职联盟</option>
+              <option value="1">天天赚兼职联盟</option>
+              <option value="1">天天赚兼职联盟</option>
+            </select>
+            <br>
+            <span>盟主享有置顶功能，其余联盟成员置顶功能失效，但仍保留在所属公众发布的兼职的管理权限</span>
+          </div-->
+        </div>
+        <div class="widget-container">
+          <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 20px; padding: 0 20px; padding-top: 10px; background: white;">
+            <li class="active">
+              <a href="#setup" role="tab" data-toggle="tab">
+                <span class="fa fa-th-large"></span>
+                基础设置
+              </a>
+            </li>
+            <li>
+              <a href="#classify" role="tab" data-toggle="tab">
+                <span class="fa fa-th-large"></span>
+                兼职分类
+              </a>
+            </li>
+          </ul>
+          <form class="form-horizontal" method="post">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="tab-content">
+
+                  <div id="setup" class="tab-pane fade in active"style="padding:10px 20px;">
+                    <div class="col-lg-10 col-lg-offset-1 col-sm-12"style="margin-top:20px;">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">关键词</label>
+                        <div class="col-sm-4 col-lg-4">
+                          <input type="text" class="form-control"></div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">回复图片</label>
+                        <div class="col-sm-4 col-lg-4">
+                          {:hook('UploadImages',array('mulipicture'=>0,'fieldname' =>'img'))}
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">客服电话</label>
+                        <div class="col-sm-4 col-lg-4">
+                          <input type="text" class="form-control"></div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-4 col-lg-4">
+                          <button class="btn">保存</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div id="classify" class="tab-pane fade"style="padding:10px 20px;">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1 col-sm-12">
+
+                          <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="btnshowbox">新增兼职</button>
+
+                          <div style="margin-bottom: 20px;"></div>
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>分类名称</th>
+                                <th>排序</th>
+                                <th>操作</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <volist name="cate" id="vo">
+                                <tr id="cate_{$vo.id}">
+                                  <td>{$vo.kind_name}</td>
+                                  <td>{$vo.sort_order}</td>
+                                  <td>
+                                    <a style="cursor:pointer;" onclick="cate_del('{$vo.id}')" class="confirm"> <i class="fa fa-trash-o"style="font-size: 18px;"></i>
+                                    </a>
+                                    <a style="cursor:pointer;" onclick="cate_edit('{$vo.id}')" class="confirm"> <i class="fa fa-edit"style="font-size: 18px;"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </volist>
+                            </tbody>
+                          </table>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- 弹窗部分 -->
+          <div id="alertedit">
+            <div id="editarea">
+              <p id="catec">新增分类</p>
+              <div class="col-lg-9"style="text-align: left;">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">分类名称</label>
+                  <div class="col-lg-9">
+                    <input type="text"class="form-control"id="catename">  
+                    <span class="tipshow">请输入分类名称！</span> 
+                  </div>
+                </div>
+                <br>          
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">排序</label>
+                  <div class="col-lg-9">
+                    <input type="text"class="form-control"id="cateorder"value="0">          
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="catename"class="col-lg-3 control-label"></label>
+                  <div class="col-lg-9">
+                    <button class="btn btn-primary"id="savebtn"><i class="fa fa-floppy-o"></i> 保存</button>
+                    <button class="btn btn-default"><i class="fa fa-times"></i> 取消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           
+          <!-- 弹窗结束 --> </div>
+      </div>
+    </div>
+  </section>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+  $(function(){
+    $('#btnshowbox').on('click',function(){
+      
+      $('#alertedit').show();
+       document.getElementById('savebtn').onclick=function(){
+         var catename=$('#catename').val();
+         var cateorder=$('#cateorder').val();
+         var cate_id=Math.ceil(Math.random()*1000);
+         if (catename.length > 0) {
+           $("tbody").append('<tr id="cate_'+cate_id+'"><td>'+catename+'</td><td>'+cateorder+'</td><td><a style="cursor:pointer;" class="confirm"><i class="fa fa-trash-o"style="font-size: 18px;"></i></a> <a style="cursor:pointer;" class="confirm"><i class="fa fa-edit"style="font-size: 18px;"></i></a></td></tr>');
+           var a=$('#cate_'+cate_id+' a');
+           a.get(0).onclick=function(){cate_del(cate_id);};
+           a.get(1).onclick=function(){cate_edit(cate_id);};
+           $('#alertedit').hide();
+         }else{
+           $('.tipshow').show();
+        };
+      };
+    });
+  });
+  $(function(){
+    $('.btn-default').on('click',function(){
+      $('#alertedit').hide(); 
+    });
+  });
+  $('.on-off').find('input').bootstrapSwitch({
+    size: 'small',
+    onText: '打开',
+    offText: '关闭',
+    offColor: 'danger'
+  });
+  
+  function cate_del(rid){
+    if(!rid) return;
+    if(!window.confirm("这将会删除移除该分类下的所有信息，\n确定要删除吗？")) return;
+    var uri='{:U("catedel")}';
+    uri += (uri.indexOf('?')>0?'&id=':'?id=')+rid;
+    $.ajax({
+      'type':'GET',
+      'url':uri,
+      'success':function(txt){
+        var re=eval('('+txt+')');
+        if(re.code=='err'){
+          alert(re.info);
+        }else{
+          var tr=document.getElementById('cate_'+re.info);
+          tr.parentNode.removeChild(tr);
+        }       
+      },
+      'error':function(){
+        alert('操作失败!');
+      }
+    });
+  }
+  // $(function () {
+  //   $('#catec').on('click',function(){
+  //     var savebtn=document.getElementById('savebtn');
+  //     var catename=$('#catename').val();
+  //     var cateorder=$('#cateorder').val();
+  //      $('savebtn').on('click',function(){
+  //       $('tbody').append('<tr><td><td></td><td></td><td></td></tr>');
+  //      });
+
+  //   });
+  // });
+  
+  function cate_edit(rid){
+    document.getElementById('catec').innerHTML='编辑分类';
+    var tds=document.getElementById('cate_'+rid).getElementsByTagName('td');
+    var savebtn=document.getElementById('savebtn');
+    var catename=document.getElementById('catename');
+    var cateorder=document.getElementById('cateorder');
+
+    catename.value=tds[0].innerHTML;
+    cateorder.value=tds[1].innerHTML;
+    savebtn.onclick=function(){
+      $.ajax({
+        'type':'POST',
+        'url':'{:U("cateedit")}',
+        'data':{'id':rid,'kind_name':catename.value,'sort_order':cateorder.value},
+        'success':function(txt){
+          var re=eval('('+txt+')');
+          if(re.code=='err'){
+            
+          }else{
+            
+          }
+          tds[0].innerHTML=catename.value;
+          tds[1].innerHTML=cateorder.value;
+          document.getElementById('alertedit').style.display='none';
+        },
+        'error':function(){
+          document.getElementById('alertedit').style.display='none';
+          alert('保存失败');
+        }
+      });
+      savebtn.onclick=null;
+    }
+    document.getElementById('alertedit').style.display='block';
+  }
+</script>
+</block>
