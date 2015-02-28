@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>xxx</title>
+<link rel="stylesheet" href="css/jquery.fullPage.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/fontello.css">
+<link rel="stylesheet" href="css/animation.css">
+<style>
+.section { text-align: center; font:"Microsoft Yahei";}
+.section1 { background-image: url(images/page1-2.png)}
+.section2 p { position: relative; left: -120%;}
+.section3 p { position: relative; bottom: -120%;}
+.section4 p { display: none;}
+#total .t_num i {
+width: 39px;
+height: 45px;
+display: inline-block;
+background: url(images/number.png) no-repeat;
+background-position: 0% 0%;
+text-indent: -999em;}
+</style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.easings.min.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+<script src="js/animateBackground-plugin.js"></script>
 
+<script>
+$(document).ready(function() {
+
+	$.fn.fullpage({
+		slidesColor: ['#fff', '#fff', '#7BAABE', '#f90', '#ef820'],
+		anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+		loopBottom: true,
+		navigation: true,
+		verticalCentered:true,
+		menu: '#menu',
+		afterLoad: function(anchorLink, index){
+			if(index == 1){
+				getdata(); 
+			}
+			if(index == 2){
+				$('.section2').find('.app-ins').delay(150).addClass('active')
+			}
+			if(index == 3){
+				$('.section3').find('p').delay(500).animate({
+					bottom: '0'
+				}, 1500, 'easeOutExpo');
+			}
+			if(index == 4){
+				$('.section4').find('p').fadeIn(2000);
+			}
+		},
+		onLeave: function(index, direction){
+			if(index == '1'){
+				getdata(); 
+			}
+			if(index == '2'){
+				$('.section2').find('.app-ins').delay(100).removeClass('active');
+			}
+			if(index == '3'){
+				$('.section3').find('p').delay(500).animate({
+					bottom: '-120%'
+				}, 1500, 'easeOutExpo');
+			}
+			if(index == '4'){
+				$('.section4').find('p').fadeOut(2000);
+			}
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+	<header class="header-nav">
+		<div class="header-content Textcenter">
+			<div class="logo m-wrap">
+				<img src="images/logo0.png" alt="" />
+			</div>
+			<div class="title">
+				<ul class="nav-list" id="menu">
+					<li data-menuanchor="page1"class="actives">
+						<a href="#page3"><b>官方论坛</b></a>
+					</li>
+					<li data-menuanchor="page2"><a href=""><b>加入我们</b></a></li>
+					<li data-menuanchor="page3"><a href=""><b>升级日志</b></a></li>
+					<li data-menuanchor="page4"><a href=""><b>新功能</b></a></li>
+					<li style=""><a href=""><b>免费注册</b></a></li>
+					<li style=""><a href="login.html"><b>登陆账户</b></a></li>
+				</ul>
+				<div class="topBar" id="topBar"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</header>
+	<div class="section section1">
+			<div class="page1-font">
+				<p>已经接入<span>11000</span>个公众平台</p>
+				<p>已经覆盖
+					<span id="total">
+						<em class="t_num"></em>
+					</span>
+				个大学生</p>	
+				<img src="images/page1-1.png">
+			</div>
+			<div class="page1-login">
+				<div class="page1-right-container">
+					<img src="images/logo.png">
+					<input type="text" placeholder="掌上大学帐号">
+					<input type="text" placeholder="掌上大学密码">
+					<div class="input-help">
+						 <span class="pull-left">测试帐号</span>
+						 <span class="pull-right">忘记密码？</span>
+					</div>
+					<div class="clear"></div>
+					<button class="btn-login">登录</button>
+					<button class="btn-register">注册</button>
+				</div>
+				<div class="clear"></div>
+			</div>
+	</div>
+	<div class="section section2">
+		<div class="page2-container">
+			<div class="page2-imgcontainer">
+				<div class="app-ins app-animate">
+					<img src="images/aap.png">
+				</div>
+				<div class="app-ins app-animate">
+					<img src="images/aap.png">
+				</div>
+				<br>
+				<i class="icon-up iconup-animation"></i>
+				<i class="icon-down icondown-animation"></i>
+			</div>
+			<!-- <img src="images/could.png"><br> -->
+		</div>
+	</div>
+	<div class="section section3">
+		<h3>第三屏</h3>
+		<p>滚动到第三屏后的回调函数执行的效果</p>
+	</div>
+	<div class="section section4">
+		<h3>第四屏</h3>
+		<p>滚动到第四屏后的回调函数执行的效果</p>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+		function show_num(n){
+
+		  var it = $(".t_num i");
+
+		  var len = String(n).length;
+
+		  for(var i=0;i<len;i++){
+
+		    if(it.length<=i){
+
+		      $(".t_num").append("<i></i>");
+		    }
+		    var num=String(n).charAt(i);
+
+		    var y = -parseInt(num)*53.5; //30轴位置
+
+		    var obj = $(".t_num i").eq(i);
+
+		    obj.animate({ //滚动动画
+
+		      backgroundPosition :'(0 '+String(y)+'px)' 
+		      }, 1500,'swing',function(){}
+		    );
+		  }
+		}
+
+		//获取人数
+		function getdata(){
+			var datac= 3514654654;
+			show_num(datac);
+		  // $.ajax({
+		  //     url: 'data.php',
+		  //   type: 'POST',
+		  //   dataType: "json",
+		  //   cache: false,
+		  //   timeout: 10000,
+		  //   error: function(){},
+		  //   success: function(data){
+		  //     show_num(data.count);
+		  //     }
+		  //  	});
+		};
+	 $(function(){
+		//鼠标hover效果	
+		 $('.nav-list li').hover(function(){
+		 
+		 	var leftstart = $(".title").position().left;
+		 	// if(hideId){
+
+		 	// 	clearTimeout(hideId);
+		 	// };
+		 	if($(this).hasClass('actives')){
+
+		 		$("#topBar").stop().animate({'opacity':"0"});
+
+		 		return false;
+		 	}
+		 	indexLi =  $('.nav-list li').index(this);
+
+		 	$("#topBar").stop().animate({
+		 		//右边距离
+		 		'left':leftstart+(92*indexLi)+ 'px',
+
+		 		'opacity':'1'
+		 	},{
+		 		duration:800,
+		 		//速度
+		 		easing:'easeOutElastic'
+		 	});						
+		 },function(){
+		// 	//hideId = setTimeout(function(){
+				$("#topBar").stop().animate({'opacity':"0"});
+		// 	//},10)
+			
+		 });	
+
+
+		//数字滚动效果
+
+	});
+    $(function(){
+        getdata(); 
+        //setInterval('getdata()', 3000);//每隔3秒执行一次 
+    }); 
+</script>
